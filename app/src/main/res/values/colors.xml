@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rainfern_seed">#5A8F6B</color>
+    <color name="rainfern_night">#0A1823</color>
+    <color name="rainfern_surface">#102634</color>
+    <color name="rainfern_alert">#C44236</color>
+    <color name="rainfern_mist">#B7D4CF</color>
+</resources>

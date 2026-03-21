@@ -1,0 +1,38 @@
+# Gradle / Android build output
+.gradle/
+.gradle-home/
+build/
+**/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# Local SDK / machine-specific config
+local.properties
+
+# Android / emulator / SDK user data kept inside repo root
+.android/
+.android-home/
+
+# Screenshots / device captures
+captures/
+
+# Repo-local temp/cache dirs shown in the tree
+.g/
+
+# Optional OS noise
+.DS_Store
+Thumbs.db
+
+# Signing keys - only if you ever create/store them in the repo folder
+*.jks
+*.keystore
+*.p12
+
+# Local logs / crash dumps
+*.log
+
+# Native / IDE leftovers some setups create
+.externalNativeBuild/
+.cxx/

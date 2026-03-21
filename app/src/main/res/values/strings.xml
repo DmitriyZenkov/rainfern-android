@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rainfern</string>
+    <string name="widget_title">Rainfern widget</string>
+    <string name="widget_small_description">Small Rainfern current weather widget</string>
+    <string name="widget_medium_description">Medium Rainfern blended forecast widget</string>
+</resources>
