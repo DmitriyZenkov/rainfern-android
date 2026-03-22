@@ -39,6 +39,7 @@ class WeatherRepository(
         val settings = settingsStore.settings.first()
         RefreshScheduler.sync(appContext, settings)
         val places = placesStore.read()
+        val activePlace = places.activePlace
         val activeLocationKey = places.activePlace?.id ?: DEVICE_LOCATION_KEY
         val cache = cacheStore.read().copy(activeLocationKey = activeLocationKey)
         return DashboardPayload(
@@ -47,9 +48,9 @@ class WeatherRepository(
             settings = settings,
             offline = !connectivityMonitor.isOnline(),
             lastError = when {
-                cache.latest == null && places.activePlace != null && !connectivityMonitor.isOnline() ->
-                    "Offline. No cached weather for ${places.activePlace.label} yet."
-                cache.latest == null && places.activePlace == null && !locationRepository.hasForegroundPermission() ->
+                cache.latest == null && activePlace != null && !connectivityMonitor.isOnline() ->
+                    "Offline. No cached weather for ${activePlace.label} yet."
+                cache.latest == null && activePlace == null && !locationRepository.hasForegroundPermission() ->
                     "Location permission is required for live weather, or pick a place manually."
                 else -> null
             },

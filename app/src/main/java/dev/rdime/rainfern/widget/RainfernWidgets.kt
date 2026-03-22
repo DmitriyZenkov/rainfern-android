@@ -2,12 +2,14 @@ package dev.rdime.rainfern.widget
 
 import android.content.Context
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.glance.GlanceModifier
 import androidx.glance.action.actionStartActivity
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.GlanceAppWidget
 import androidx.glance.appwidget.GlanceAppWidgetReceiver
 import androidx.glance.appwidget.provideContent
+import androidx.glance.appwidget.updateAll
 import androidx.glance.background
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
@@ -23,7 +25,6 @@ import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
-import androidx.glance.unit.dp
 import dev.rdime.rainfern.MainActivity
 import dev.rdime.rainfern.data.local.ForecastCacheStore
 import dev.rdime.rainfern.data.local.SettingsStore
@@ -109,52 +110,51 @@ private fun WidgetContent(
                     style = TextStyle(color = ColorProvider(widgetSupportColor(settings))),
                 )
             }
-            return
-        }
-
-        Column(horizontalAlignment = Alignment.Horizontal.Start) {
-            Text(
-                "Rainfern",
-                style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold),
-            )
-            Text(
-                forecast.locationName,
-                style = TextStyle(color = ColorProvider(widgetMutedColor(settings))),
-            )
-            Spacer(GlanceModifier.height(8.dp))
-            if (compact) {
+        } else {
+            Column(horizontalAlignment = Alignment.Horizontal.Start) {
                 Text(
-                    formatTemperature(forecast.current.temperatureC, settings),
+                    "Rainfern",
                     style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold),
                 )
                 Text(
-                    widgetCompactDetail(forecast, settings),
-                    style = TextStyle(color = ColorProvider(widgetSupportColor(settings))),
+                    forecast.locationName,
+                    style = TextStyle(color = ColorProvider(widgetMutedColor(settings))),
                 )
-            } else {
-                Row(modifier = GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.Vertical.CenterVertically) {
-                    Column {
-                        Text(
-                            formatTemperature(forecast.current.temperatureC, settings),
-                            style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold),
-                        )
-                        Text(
-                            forecast.current.conditionText,
-                            style = TextStyle(color = ColorProvider(widgetSupportColor(settings))),
-                        )
-                    }
-                    Spacer(GlanceModifier.width(16.dp))
-                    Column {
-                        Text(
-                            forecast.hourly.firstOrNull()?.let {
-                                "Next: ${formatClock(it.time, settings)}"
-                            } ?: "Next: --",
-                            style = TextStyle(color = ColorProvider(widgetMutedColor(settings))),
-                        )
-                        Text(
-                            widgetMediumDetail(forecast, settings),
-                            style = TextStyle(color = ColorProvider(widgetMutedColor(settings))),
-                        )
+                Spacer(GlanceModifier.height(8.dp))
+                if (compact) {
+                    Text(
+                        formatTemperature(forecast.current.temperatureC, settings),
+                        style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold),
+                    )
+                    Text(
+                        widgetCompactDetail(forecast, settings),
+                        style = TextStyle(color = ColorProvider(widgetSupportColor(settings))),
+                    )
+                } else {
+                    Row(modifier = GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.Vertical.CenterVertically) {
+                        Column {
+                            Text(
+                                formatTemperature(forecast.current.temperatureC, settings),
+                                style = TextStyle(color = ColorProvider(Color.White), fontWeight = FontWeight.Bold),
+                            )
+                            Text(
+                                forecast.current.conditionText,
+                                style = TextStyle(color = ColorProvider(widgetSupportColor(settings))),
+                            )
+                        }
+                        Spacer(GlanceModifier.width(16.dp))
+                        Column {
+                            Text(
+                                forecast.hourly.firstOrNull()?.let {
+                                    "Next: ${formatClock(it.time, settings)}"
+                                } ?: "Next: --",
+                                style = TextStyle(color = ColorProvider(widgetMutedColor(settings))),
+                            )
+                            Text(
+                                widgetMediumDetail(forecast, settings),
+                                style = TextStyle(color = ColorProvider(widgetMutedColor(settings))),
+                            )
+                        }
                     }
                 }
             }

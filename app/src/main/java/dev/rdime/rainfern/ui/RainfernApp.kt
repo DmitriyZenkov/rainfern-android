@@ -32,7 +32,6 @@ import androidx.compose.material.icons.rounded.Air
 import androidx.compose.material.icons.rounded.Cloud
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
-import androidx.compose.material.icons.rounded.Foggy
 import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material.icons.rounded.Refresh
@@ -63,8 +62,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -2467,7 +2466,7 @@ private fun weatherIcon(condition: WeatherCondition): ImageVector = when (condit
     WeatherCondition.CLEAR -> Icons.Rounded.WbSunny
     WeatherCondition.PARTLY_CLOUDY -> Icons.Rounded.WbCloudy
     WeatherCondition.CLOUDY -> Icons.Rounded.Cloud
-    WeatherCondition.FOG -> Icons.Rounded.Foggy
+    WeatherCondition.FOG -> Icons.Rounded.Cloud
     WeatherCondition.DRIZZLE, WeatherCondition.RAIN, WeatherCondition.SHOWERS -> Icons.Rounded.Umbrella
     WeatherCondition.SNOW, WeatherCondition.SLEET, WeatherCondition.HAIL -> Icons.Rounded.AcUnit
     WeatherCondition.THUNDERSTORM -> Icons.Rounded.Thunderstorm
